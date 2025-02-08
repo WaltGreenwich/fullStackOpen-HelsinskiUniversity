@@ -1,18 +1,14 @@
-const Part = ({ part, exercises }) => {
-  return (
-    <div>
-      <p>
-        {part} {exercises}
-      </p>
-    </div>
-  );
-};
+const Part = ({ name, exercises }) => (
+  <p>
+    {name} {exercises}
+  </p>
+);
 
-const Content = ({ parts }) => {
+const Content = ({ course }) => {
   return (
     <div>
-      {parts.map((item, index) => (
-        <Part key={index} part={item.part} exercises={item.exercises} />
+      {course.parts.map((part, index) => (
+        <Part key={index} name={part.name} exercises={part.exercises} />
       ))}
     </div>
   );
