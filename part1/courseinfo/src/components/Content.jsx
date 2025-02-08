@@ -1,15 +1,19 @@
-const Content = (props) => {
+const Part = ({ part, exercises }) => {
   return (
     <div>
       <p>
-        {props.part1} {props.exercises1}
+        {part} {exercises}
       </p>
-      <p>
-        {props.part2} {props.exercises2}
-      </p>
-      <p>
-        {props.part3} {props.exercises3}
-      </p>
+    </div>
+  );
+};
+
+const Content = ({ parts }) => {
+  return (
+    <div>
+      {parts.map((item, index) => (
+        <Part key={index} part={item.part} exercises={item.exercises} />
+      ))}
     </div>
   );
 };
