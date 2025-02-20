@@ -15,10 +15,12 @@ const VotingSystem = ({
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{anecdote}</p>
       <p>has {votes[index]} votes</p>
       <button onClick={handleClick}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
     </div>
   );
 };
@@ -42,6 +44,24 @@ const App = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
   };
 
+  const getMostVotedAnecdote = () => {
+    let maxVotes = 0;
+    let mostVotedIndex = 0;
+
+    votes.forEach((voteCount, index) => {
+      if (voteCount > maxVotes) {
+        maxVotes = voteCount;
+        mostVotedIndex = index;
+      }
+    });
+    return {
+      anecdote: anecdotes[mostVotedIndex],
+      votes: maxVotes,
+    };
+  };
+
+  const mostVoted = getMostVotedAnecdote();
+
   return (
     <div>
       <VotingSystem
@@ -51,6 +71,14 @@ const App = () => {
         setVotes={setVotes}
         handleNextAnecdote={handleNextAnecdote}
       />
+
+      {mostVoted.votes > 0 && (
+        <div>
+          <h2>Anecdote with the most votes</h2>
+          <p>{mostVoted.anecdote}</p>
+          <p>has {mostVoted.votes} votes</p>
+        </div>
+      )}
     </div>
   );
 };
