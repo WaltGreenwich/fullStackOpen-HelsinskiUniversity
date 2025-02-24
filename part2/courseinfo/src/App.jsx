@@ -1,7 +1,7 @@
 import Course from "./components/Course";
 
-const App = (course) => {
-  return <Course course={course} />;
+const App = (courses) => {
+  return <Course course={courses} />;
 };
 
 export default App;
