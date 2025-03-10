@@ -6,10 +6,20 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    if (newName.trim() === "") return;
 
+    // Verificar si el nombre ya existe en la lista
+    const nameExists = persons.some(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    );
+
+    if (nameExists) {
+      alert(`${newName} is already added to the phonebook`);
+      return;
+    }
+
+    // Agregar el nuevo nombre si no existe
     setPersons([...persons, { name: newName }]);
-    setNewName(""); // Limpiar el input después de agregar
+    setNewName(""); // Limpiar el input
   };
 
   const handleNameChange = (event) => {
