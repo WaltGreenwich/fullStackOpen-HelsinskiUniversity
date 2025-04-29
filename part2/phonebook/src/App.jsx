@@ -22,6 +22,11 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
+    const personObject = {
+      name: newName,
+      number: newNumber,
+    };
+
     const nameExists = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     );
@@ -31,9 +36,13 @@ const App = () => {
       return;
     }
 
-    setPersons([...persons, { name: newName, number: newNumber }]);
-    setNewName("");
-    setNewNumber("");
+    axios
+      .post("http://localhost:3001/persons", personObject)
+      .then((response) => {
+        setPersons([...persons, response.data]);
+        setNewName("");
+        setNewNumber("");
+      });
   };
 
   return (
